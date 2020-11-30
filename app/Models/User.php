@@ -15,7 +15,7 @@ static public function signInUser($request){
 $valid=false;
 $password=$request['password'];
 $email=$request['email'];
-$sql="SELECT * FROM users u JOIN users_roles ur on u.id=ur.uid
+$sql="SELECT * FROM users u JOIN user_roles_ ur on u.id=ur.uid
 WHERE u.email=?";
 $user=DB::select($sql,[$email]);
 if($user){
@@ -49,7 +49,7 @@ $user->password=bcrypt($request['password']);
 $user->name=$request['name'];
 $user->save();
 $uid=$user->id;
-DB::insert("INSERT INTO users_roles VALUES($uid,7)");
+DB::insert("INSERT INTO user_roles_ VALUES($uid,7)");
 Session::put('user_id',$user->id);
 Session::put('user_name',$user->name);
 Session::flash('sm','you have signed up succesfuly '.$user->name);
@@ -61,11 +61,52 @@ static public function logOut(){
 }
 static public function allUsers(&$data){
 $data['users']=DB::table('users')
-->join('users_roles', 'users.id', '=', 'users_roles.uid')->
-join('users_titles', 'users_roles.role', '=', 'users_titles.id')->
+->join('user_roles_', 'users.id', '=', 'user_roles_.uid')->
+join('users_titles', 'user_roles_.role', '=', 'users_titles.ut_id')->
 orderByDesc('updated_at')->get()->toArray();
+
 }
 static public function roles(&$role){
-    $role['roles']=DB::table('users_roles')->join('users_titles', 'users_roles.role', '=', 'users_titles.id')->groupBy('users_roles.role')->select('users_roles.role','users_titles.users_title')->get()->toArray();
+    $role['roles']=DB::table('user_roles_')->join('users_titles', 'user_roles_.role', '=', 'users_titles.ut_id')->groupBy('user_roles_.role')->select('user_roles_.role','users_titles.users_titles')->get()->toArray();
 }
+static public function signupWithAdmin($request){
+
+
+
+    $user=new self(); ;
+    $user->email=$request['email'];
+    $user->password=bcrypt($request['password']);
+    $user->name=$request['name'];
+
+    $user->save();
+    $uid=$user->id;
+    ;
+    $role=(int)$request['role'];
+    DB::insert("INSERT INTO users_roles VALUES($uid,$role)");
+    Session::put('user_id',$user->id);
+    Session::put('user_name',$user->name);
+    Session::flash('sm','you have signed up succesfuly '.$user->name);
+    return true;
+
+    }
+    static public function getUser($id,&$data){
+        $user=DB::table('users')->where('users.id','=',$id)->join('user_roles_', 'users.id', '=', 'user_roles_.uid')->get()->toArray();
+$data['user']=$user[0];
+}
+static public function updateWithAdmin($id,$request){
+    $user=self::find($id);
+    $user->name=$request['name'];
+    $user->email=$request['email'];
+    $user->save();
+    $role=$request['role'];
+    DB::update(" UPDATE user_roles_ SET user_roles_.role=$role WHERE user_roles_.uid=$id");
+    Session::put('user_id',$user->id);
+    Session::put('user_name',$user->name);
+    Session::flash('sm','you have updated the user  succesfuly '.$user->name);
+
+}
+
+
+
+
 }

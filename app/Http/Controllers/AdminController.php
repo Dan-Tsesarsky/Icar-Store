@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Admin;
 use DB;
 use App\Http\Requests\SignupAdminRequest;
 class AdminController extends MainController
@@ -43,7 +44,9 @@ class AdminController extends MainController
      */
     public function store(SignupAdminRequest $request)
     {
-        echo __METHOD__;
+      $request=($request->toArray());
+      User::signupWithAdmin($request);
+      return redirect('cms/admin/users');
     }
 
     /**
@@ -65,7 +68,10 @@ class AdminController extends MainController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        User::roles(self::$data);
+User::getUser($id,self::$data);
+
+        return view('cms.users.edit_users',self::$data);
     }
 
     /**
@@ -75,9 +81,11 @@ class AdminController extends MainController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id,SignupAdminRequest $request)
     {
-        echo __METHOD__;
+        $request=$request->toArray();
+        User::updateWithAdmin($id,$request);
+        return redirect('cms/admin/users');
     }
 
     /**

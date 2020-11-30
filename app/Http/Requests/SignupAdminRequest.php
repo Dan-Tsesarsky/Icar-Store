@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SignupAdminRequest extends FormRequest
@@ -21,13 +21,17 @@ class SignupAdminRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
+
     {
+        $unique=isset($request['user_id'])?','.($request['user']):'';
+        $withnopassword=!isset($request['no_password'])?"required":"";
+
         return [
             'name'=>'min:2|required',
-            'email'=>'required|email|unique:users,email',
+            'email'=>'required|email|unique:users,email'.$unique,
             'role'=>'required|',
-            'password'=>'required|min:6|max:10|confirmed'
+            'password'=>"$withnopassword|min:6|max:10|confirmed"
         ];
     }
 }

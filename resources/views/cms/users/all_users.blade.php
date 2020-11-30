@@ -1,5 +1,6 @@
 @extends('cms.master')
 @section('content')
+
 <div class='container'>
     <div class='row'>
         <div>
@@ -25,9 +26,10 @@
                 <tbody>
                     <tr>
                         @foreach($users as $item)
+
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
-                        <td>{{$item->users_title}}</td>
+                        <td>{{$item->users_titles}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td><a href={{url('cms/admin/users/'.$item->id.'/edit')}}>Edit</a> | <a

@@ -87,7 +87,10 @@ return view('cms.catagories.edit_categorie',self::$data);
      */
     public function destroy($id)
     {
+        Categorie::find($id)->products()->delete();
+
         Categorie::destroy($id);
+
         Session::flash('sm','your catagories was deleted from page');
         return redirect('cms/catagories');
     }

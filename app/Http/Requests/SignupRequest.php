@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Http\Request;
 class SignupRequest extends FormRequest
 {
     /**
@@ -21,8 +21,9 @@ class SignupRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
+
         return [
             'name'=>'min:2|required',
             'email'=>'required|email|unique:users,email',

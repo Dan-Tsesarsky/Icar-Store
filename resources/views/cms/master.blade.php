@@ -19,7 +19,7 @@
     <header>
 
         <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-            <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+            <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href={{url('cms/dashborad')}}>Icar Dashborad</a>
             <button class="navbar-toggler position-absolute d-md-none" type="button" data-toggle="collapse"
                 data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
                 aria-label="Toggle navigation">
@@ -166,6 +166,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 
 
@@ -174,6 +175,7 @@
 
 
 </body>
+
 
 
 
