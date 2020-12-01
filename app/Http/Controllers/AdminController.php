@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
-use DB;
+use DB,Session;
 use App\Http\Requests\SignupAdminRequest;
+
 class AdminController extends MainController
 {
    static private $roles='';
@@ -57,6 +58,8 @@ class AdminController extends MainController
      */
     public function show($id)
     {
+        self::$data['id']=$id;
+        return view('cms.users.delete_user',self::$data);
 
     }
 
@@ -96,6 +99,8 @@ User::getUser($id,self::$data);
      */
     public function destroy($id)
     {
-        echo __METHOD__;
+        User::destroy($id);
+        Session::flash('sm','your chosen user was deleted from page');
+        return redirect('cms/admin/users');
     }
 }

@@ -47,7 +47,7 @@
                         @else
                         <button class="btn btn-success" disabled="disabled">In cart +</button>
                         @endif
-                        <a href={{url('shop/'.$cat_url.'/'.$product['url'])}} class="btn btn-primary">More info
+                        <a href={{url('shop/'.$cat_url.'/'.$product['url'])}} class="btn btn-primary ">More info
                         </a>
                     </p>
                 </div>

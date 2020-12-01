@@ -24,7 +24,7 @@
             <div class="form-group  col-md-6">
                 <select name="role" id="" class="form-control">
                     @foreach($roles as $role)
-                    <option value='{{$role->role}}'>{{$role->users_title}}</option>
+                    <option value='{{$role->role}}'>{{$role->users_titles}}</option>
                     @endforeach
                 </select>
             </div>

@@ -15,7 +15,7 @@
                 <h3>{{$category['title']}}</h3>
                 <img src={{asset('images/'.$category['img'])}} alt="" class="img-fluid">
                 <div>
-                    <a href={{url('shop/'.$category['url'])}} class="btn  btn-success mt-2">view catagory
+                    <a href={{url('shop/'.$category['url'])}} class="btn  btn-success my-2">view catagory
                     </a>
                 </div>
             </div>

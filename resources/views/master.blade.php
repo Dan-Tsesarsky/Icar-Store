@@ -31,7 +31,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href={{url('')}}>Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href={{url('')}}>Home<span class="sr-only">(current)</span></a>
                         </li>@foreach($menus as $item)
                         <li class="nav-item">
                             <a class="nav-link" href={{url($item['url'])}}>{{$item['link']}}</a>
@@ -140,9 +140,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
     </script>
-    <script src="https://kit.fontawesome.com/2c77193513.js" crossorigin="anonymous"></script>
-
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://kit.fontawesome.com/2c77193513.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <script src={{asset("js/app.js")}}></script>

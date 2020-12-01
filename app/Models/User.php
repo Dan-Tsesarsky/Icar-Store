@@ -82,7 +82,7 @@ static public function signupWithAdmin($request){
     $uid=$user->id;
     ;
     $role=(int)$request['role'];
-    DB::insert("INSERT INTO users_roles VALUES($uid,$role)");
+    DB::insert("INSERT INTO user_roles_ VALUES($uid,$role)");
     Session::put('user_id',$user->id);
     Session::put('user_name',$user->name);
     Session::flash('sm','you have signed up succesfuly '.$user->name);
