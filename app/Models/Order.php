@@ -12,25 +12,28 @@ class Order extends Model
   static  public function saveNew(){
 $cartCollection=Cart::getContent();
 $cart=$cartCollection->toArray();
-$data=[]; $err=[];
-dd(count($err));
+$data=[]; $err=[]; $stock=[];
+
 foreach($cart as $key=>$val){
 $data[$key]=$val;
-
- $prod=Product::find($key);
-
-
-if($prod->stock>=$data[$key]['quantity']){
-$prod->stock=$prod->stock-$data[$key]['quantity'];
-$prod->save();}
-else {
-    if($prod->stock)$err[$key]="we have only $prod->stock cars of $prod->title left for  you cant order more ";
-    else if($prod->stock==0){$err[$key]="we dont have  more cars in stock ";}
+if($data[$key]['attributes']['stock']<$data[$key]['quantity']) {
+    $proderrstock=$data[$key]['attributes']['stock'];
+    $proderrname=$data[$key]['name'];
+    if($data[$key]['attributes']['stock'])$err[$key]="we have only $proderrstock cars of $proderrname left for  you cant order more ";
+    else if($data[$key]['attributes']['stock']==0){$err[$key]="we dont have  more cars of $proderrname in stock ";}
 }
+else if(count($err)==0 && $data[$key]['attributes']['stock']>=$data[$key]['quantity']){
+    $stock[$key]=$data[$key]['attributes']['stock']-$data[$key]['quantity'];}
 };
 if(count($err)==0){
+    foreach($cart as $index=>$val){
+$prod=Product::find($index);
+$prod->stock=$stock[$index];
+$prod->save();
+    }
+
+
     $cart=serialize($cart);
-    ;
     $order=new self();
     $order->user_id=Session::get('user_id');
     $order->data=$cart;
@@ -39,6 +42,9 @@ if(count($err)==0){
     Cart::clear();
     Session::flash('sm','your order had been succesfull ');
 
+}
+else{
+    return $err;
 }
 
 

@@ -35,11 +35,17 @@
         <span class="text-danger"> {{$errors->first('price')}}</span>
 
     </div>
+
     <div class="form-group  col-md-6">
         <label for="exampleInputUrl1 ">Url</label>
         <input type="text" class="form-control link-target" id="exampleInputUrl1" name="url" value={{old('url')}}>
         <span class="text-danger"> {{$errors->first('url')}}</span>
 
+    </div>
+    <div class="form-group  col-md-6">
+        <label for="exampleInputUrl1 ">Stock</label>
+        <input type="number" class="form-control" value={{old('stock')}} name="stock">
+        <span class="text-danger"> {{$errors->first('stock')}}</span>
     </div>
     <div class="input-group col-md-6">
         <div class="input-group mb-3">

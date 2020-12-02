@@ -82,8 +82,14 @@ public function Order(Request $request){
 ;
        return redirect('user/signin?rt=shop/checkout');
     }
-    Product::Order($request);
-    return redirect('');
+    if(empty($res=Product::Order($request))){
+    return redirect('');}
+    else{
+        $errors=[];
+
+
+        return redirect('shop/checkout')->withErrors($res);
+    }
 
 }
 

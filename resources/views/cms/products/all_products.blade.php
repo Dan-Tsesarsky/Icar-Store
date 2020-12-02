@@ -17,6 +17,7 @@
                         <th>catagorie</th>
                         <th>article</th>
                         <th>url</th>
+                        <th>stock</th>
                         <th>image</th>
                         <th>price</th>
                         <th>operation</th>
@@ -34,8 +35,10 @@
                         @endforeach
                         <td>{!!$item['article']!!}</td>
                         <td>{{$item['url']}}</td>
+                        <td>{{$item['stock']}}</td>
                         <td><img src={{asset('images/'.$item['img'])}} alt="" width='70px'>
                         </td>
+
                         <td>{{$item['price']}}$</td>
                         <td><a href={{url('cms/products/'.$item['id'].'/edit')}}>Edit</a> | <a
                                 href={{url('cms/products/'.$item['id'])}}>Delete</a>
@@ -167,5 +170,13 @@
 
 
 
-    
-tion
+
+
+
+
+
+
+
+
+
+    tion

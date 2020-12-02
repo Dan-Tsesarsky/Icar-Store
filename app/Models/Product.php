@@ -38,7 +38,7 @@ else
 if(!Cart::get($id)){
 if($product=self::find($id)){
 $product=$product->toArray();
-Cart::add($id, $product['title'], $product['price'], 1, []);
+Cart::add($id, $product['title'], $product['price'], 1, ['stock'=>$product['stock']]);
 Session::flash('sm',$product['title'].' added to your cart');
 }
       }
@@ -78,7 +78,10 @@ Cart::clear();
 
 }
 static public function Order(){
-  Order::saveNew();
+$res=Order::saveNew();
+  if(!empty($res)&&count($res)>0){
+return($res);
+  }
 
 }
 static public function search($request){
@@ -106,6 +109,7 @@ static public function saveNew($request){
      $product->article=$request['article'];
      $product->price=$request['price'];
      $product->url=$request['url'];
+     $product->stock=$request['stock'];
      $img=self::addImage($request);
      $image_name=$img?$img:'user-image-with-black-background.png';
      $product->img=$image_name;
@@ -120,6 +124,7 @@ Session::flash('sm','your Catagorie was add to page ');$product->url=$request['u
      $product->title=$request['title'];
      $product->price=$request['price'];
      $product->article=$request['article'];$product->url=$request['url'];
+     $product->stock=$request['stock'];
      $img=self::addImage($request);
 if($img){
 $product->img=$img;

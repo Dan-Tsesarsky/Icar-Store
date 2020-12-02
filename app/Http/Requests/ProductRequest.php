@@ -29,7 +29,8 @@ class ProductRequest extends FormRequest
         'title'=>'required|min:2',
         'article'=>'required|min:2',
         'price'=>'required|numeric|min:2',
-        'url'=>'required|regex:/^[a-z\d-]+$/i|unique:categories,url'.$unique,'img'=>'image','categorie_id'=>'required|numeric',
+        'url'=>'required|regex:/^[a-z\d-]+$/i|unique:categories,url'.$unique,
+        'stock;'=>'required|numeric|gte:0|max:100','img'=>'image','categorie_id'=>'required|numeric',
         ];
     }
 }

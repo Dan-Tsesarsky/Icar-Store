@@ -1,5 +1,6 @@
 @extends('cms.master')
-@section('content')<h2>Section title</h2>
+@section('content')
+<h2>Section title</h2>
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
