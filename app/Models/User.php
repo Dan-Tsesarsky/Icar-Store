@@ -50,6 +50,8 @@ $user->name=$request['name'];
 $user->save();
 $uid=$user->id;
 DB::insert("INSERT INTO user_roles_ VALUES($uid,7)");
+
+DB::insert("INSERT INTO user_profiles (`id`, `gender`, `img`, `address`, `age`) VALUES ($uid, '', '', '', '')");
 Session::put('user_id',$user->id);
 Session::put('user_name',$user->name);
 Session::flash('sm','you have signed up succesfuly '.$user->name);
@@ -71,8 +73,6 @@ static public function roles(&$role){
 }
 static public function signupWithAdmin($request){
 
-
-
     $user=new self(); ;
     $user->email=$request['email'];
     $user->password=bcrypt($request['password']);
@@ -83,6 +83,7 @@ static public function signupWithAdmin($request){
     ;
     $role=(int)$request['role'];
     DB::insert("INSERT INTO user_roles_ VALUES($uid,$role)");
+    DB::insert("INSERT INTO user_profiles (`id`, `gender`, `img`, `adress`, `age`) VALUES ($uid, '', '', '', '')");
     Session::put('user_id',$user->id);
     Session::put('user_name',$user->name);
     Session::flash('sm','you have signed up succesfuly '.$user->name);

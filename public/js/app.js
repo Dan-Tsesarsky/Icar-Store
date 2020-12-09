@@ -66,7 +66,7 @@ if(options.length>0){
         }
 
 
-     }); 
+     });
     }
   }else if(response.length==0){
       options=['no response is avilble']
@@ -79,7 +79,20 @@ if(options.length>0){
        };
     }
    );
-$('.searchbtn').on('click',function(){
-
+$('#inputGroupFile02').on('change',function(){
+    previewFile();
 
 });
+function previewFile() {
+	const file = $("#inputGroupFile02").get(0).files[0];
+	if (file) {
+		$("label[for='inputGroupFile02']").text(file.name);
+
+		const reader = new FileReader();
+		reader.onload = function () {
+			$("#previewImg").attr("src", reader.result);
+		};
+
+
+	}
+}

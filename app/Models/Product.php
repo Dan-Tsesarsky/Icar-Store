@@ -9,8 +9,8 @@ class Product extends Categorie
 {
     use HasFactory;
    static public function getProductUrl($cat_url,&$data,$orderby){
-       if(Categorie::where('url','=',$cat_url)->first()){
-       $catagorey=Categorie::where('url','=',$cat_url)->first()->toArray();
+       if($catagorey=Categorie::where('url','=',$cat_url)->first()){
+       $catagorey->toArray();
        $data["title"].=$catagorey["title"]." Product";
 if($products=Categorie::find($catagorey['id'])->products){
 if(!$orderby){
@@ -125,7 +125,7 @@ Session::flash('sm','your Catagorie was add to page ');$product->url=$request['u
      $product->price=$request['price'];
      $product->article=$request['article'];$product->url=$request['url'];
      $product->stock=$request['stock'];
-     $img=self::addImage($request);
+     $img=self::addImage($request,$id);
 if($img){
 $product->img=$img;
 }
@@ -134,10 +134,12 @@ Session::flash('sm','your Catagorie was updated
 ');
   }
 
-  static private function addImage($request){
+  static private function addImage($request,$id){
     $image_name='';
     if($request->hasFile('img')&&$request->file('img')->isValid()){
         $file=$request->file('img');
+        $product=self::find($id);
+dd( $product->img);
 $image_name=date('Y.m.d.h.i.s').'-'.$file->getClientOriginalName();
 
 $request->file('img')->move(public_path('').'/images',$image_name);

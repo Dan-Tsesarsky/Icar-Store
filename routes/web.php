@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,7 @@ Route::group(['prefix'=>'user'],function () {
     Route::post('signin',[UserController::class,'postSignIn']);
     Route::get('signup',[UserController::class,'getSignUp']);
     Route::post('signup',[UserController::class,'postSignUp']);
+    Route::resource('profile', UserProfileController::class)->middleware("userlogged");
     Route::get('logout',[UserController::class,'logOut']);
 });
 Route::group(['prefix'=>'cms','middleware' => 'adminpanel'],function () {
